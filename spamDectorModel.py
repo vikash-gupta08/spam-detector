@@ -1,20 +1,10 @@
-# import pandas as pd
-# import requests
-# from io import StringIO
-
-# url = "https://drive.google.com/uc?id=1dMXbX9rrZsEIaJrME6EZYBnDl3uYpPrt"
-# response = requests.get(url)
-# data = pd.read_csv(StringIO(response.text))
-# data.drop_duplicates(inplace=True)
-# print(data.head())
-
 import pandas as pd
 import re
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import classification_report, accuracy_score
-# import streamlit as st
+import streamlit as st
 import requests
 from io import StringIO
 
@@ -33,7 +23,7 @@ data['category'] = data['category'].replace({'ham': 'Not Spam', 'spam': 'Spam'})
 
 def preprocess_text(text):
     text = text.lower()
-    text = re.sub(r'[^\w\s]', '', text)  # remove punctuation
+    text = re.sub(r'[^\w\s]', '', text)
     return text
 
 data['message'] = data['message'].apply(preprocess_text)
@@ -65,11 +55,11 @@ def predict_message(msg):
     return prediction[0]
 
 # 8. Simple Streamlit app UI for deployment
-# st.title("Spam Detection")
+st.title("Spam Detection")
 
-# user_input = st.text_area("Enter Message Here")
-# if st.button("Predict"):
-#     result = predict_message(user_input)
-#     st.write(f"Prediction: {result}")
+user_input = st.text_area("Enter Message Here")
+if st.button("Predict"):
+    result = predict_message(user_input)
+    st.write(f"Prediction: {result}")
 
-print(predict_message("you win a new phone"))
+# print(predict_message("HI"))
