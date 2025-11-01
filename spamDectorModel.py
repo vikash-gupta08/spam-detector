@@ -57,9 +57,75 @@ def predict_message(msg):
 # 8. Simple Streamlit app UI for deployment
 st.title("Spam Detection")
 
-user_input = st.text_area("Enter Message Here")
-if st.button("Predict"):
-    result = predict_message(user_input)
-    st.write(f"Prediction: {result}")
+# user_input = st.text_area("Enter Message Here")
+# if st.button("Predict"):
+#     result = predict_message(user_input)
+#     st.write(f"Prediction: {result}")
+
+
+# Page configuration
+st.set_page_config(page_title="Message Predictor", page_icon="💬", layout="centered")
+
+# Custom CSS for better styling
+st.markdown("""
+    <style>
+    .main {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .stTextArea > label {
+        font-size: 18px;
+        font-weight: bold;
+        color: #0d6efd;
+    }
+    .stButton button {
+        background-color: #0d6efd;
+        color: white;
+        font-size: 16px;
+        padding: 10px 24px;
+        border: none;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+    .stButton button:hover {
+        background-color: #0b5ed7;
+    }
+    .prediction-box {
+        padding: 15px;
+        margin-top: 20px;
+        border: 2px solid #0d6efd;
+        border-radius: 8px;
+        background-color: #e7f1ff;
+        color: #0d6efd;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+# Title and description
+st.title("💬 Message Prediction App")
+st.markdown("Enter your message below and click **Predict** to get the result.")
+
+# Input area with better label
+user_input = st.text_area(
+    "Enter your message here:",
+    height=150,
+    placeholder="Type something here..."
+)
+
+# Predict button and result display
+if st.button("🔮 Predict"):
+    if user_input.strip() == "":
+        st.warning("Please enter a message before predicting.")
+    else:
+        # Simulate prediction (replace with actual predict_message function)
+        result = predict_message(user_input)  # Ensure this function is defined
+        st.markdown(f"<div class='prediction-box'>Prediction: {result}</div>", unsafe_allow_html=True)
+else:
+    st.info("Enter a message and click **Predict** to see the result.")
+
 
 # print(predict_message("HI"))
